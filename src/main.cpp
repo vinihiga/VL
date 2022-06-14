@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <fstream>
+#include "commons/algorithms.hpp"
+#include "commons/linkedlist.hpp"
 
 void checkParameters(char *argv[]);
 char** tokenize();
@@ -31,4 +33,10 @@ void checkParameters(char *argv[]) {
     }
 
     indata.close();
+
+    Stack* stack = new Stack();
+    stack->push('i');
+    stack->push('o');
+
+    std::cout << stack->pop();
 }
