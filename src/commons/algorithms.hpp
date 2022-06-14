@@ -11,6 +11,7 @@ public:
     ~Stack();
     void push(char element);
     char pop();
+    int count();
 };
 
 #endif

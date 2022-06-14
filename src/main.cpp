@@ -27,16 +27,12 @@ void checkParameters(char *argv[]) {
     }
 
     std::string word;
+    Stack* stack = new Stack();
 
     while (indata >> word) {
-        std::cout << word << std::endl;
+        stack->push(word.c_str()[0]);
     }
 
     indata.close();
-
-    Stack* stack = new Stack();
-    stack->push('i');
-    stack->push('o');
-
-    std::cout << stack->pop();
+    std::cout << "Loaded " << stack->count() << " symbols" << std::endl;
 }
