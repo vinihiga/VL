@@ -491,3 +491,4 @@ FodyWeavers.xsd
 .vscode/
 src/*/*.dSYM
 src/*/*.o
+src/*.exe
