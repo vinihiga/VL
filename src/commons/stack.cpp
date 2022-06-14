@@ -1,4 +1,4 @@
-#include "algorithms.hpp"
+#include "stack.hpp"
 #include "linkedlist.hpp"
 #include <iostream>
 
@@ -9,12 +9,12 @@ Stack::Stack() {
 Stack::~Stack() {
 }
 
-void Stack::push(char element) {
-    LinkedList<char>* currentElement = this->list;
+void Stack::push(std::string element) {
+    LinkedList<std::string>* currentElement = this->list;
 
     // If this is the 1st time. We initialize the list.
     if (currentElement == nullptr) {
-        this->list = new LinkedList<char>();
+        this->list = new LinkedList<std::string>();
         currentElement = this->list;
         currentElement->value = element;
         currentElement->next = nullptr;
@@ -25,18 +25,18 @@ void Stack::push(char element) {
         currentElement = currentElement->next;
     }
 
-    currentElement->next = new LinkedList<char>();
+    currentElement->next = new LinkedList<std::string>();
     currentElement = currentElement->next;
     currentElement->value = element;
     currentElement->next = nullptr;
 }
 
-char Stack::pop() {
-    char value = '\0';
+std::string Stack::pop() {
+    std::string value = "\0";
 
     if (this->list != nullptr) {
-        LinkedList<char>* currentElement = this->list;
-        LinkedList<char>* previousElement = nullptr;
+        LinkedList<std::string>* currentElement = this->list;
+        LinkedList<std::string>* previousElement = nullptr;
 
         while (currentElement->next != nullptr) {
             previousElement = currentElement;
@@ -59,7 +59,7 @@ char Stack::pop() {
 
 int Stack::count() {
     int size = 0;
-    LinkedList<char>* currentElement = this->list;
+    LinkedList<std::string>* currentElement = this->list;
 
     if (currentElement == nullptr) {
         return size;

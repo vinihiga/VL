@@ -1,16 +1,17 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 #include "linkedlist.hpp"
+#include <iostream>
 
 //template <typename T>
 class Stack {
 private:
-    LinkedList<char>* list;
+    LinkedList<std::string>* list;
 public:
     Stack();
     ~Stack();
-    void push(char element);
-    char pop();
+    void push(std::string element);
+    std::string pop();
     int count();
 };
 

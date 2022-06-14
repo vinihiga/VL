@@ -7,11 +7,9 @@
 
 #include <iostream>
 #include <fstream>
-#include "commons/algorithms.hpp"
-#include "commons/linkedlist.hpp"
+#include "lexical/tokenizer.hpp"
 
 void checkParameters(char *argv[]);
-char** tokenize();
 
 int main(int argc, char *argv[]) {
     checkParameters(argv);
@@ -19,20 +17,12 @@ int main(int argc, char *argv[]) {
 }
 
 void checkParameters(char *argv[]) {
-    std::ifstream indata;
-    indata.open("../samples/addition.vl");
+    std::ifstream file;
+    file.open("../samples/addition.vl");
 
-    if (!indata) {
+    if (!file) {
         return;
     }
 
-    std::string word;
-    Stack* stack = new Stack();
-
-    while (indata >> word) {
-        stack->push(word.c_str()[0]);
-    }
-
-    indata.close();
-    std::cout << "Loaded " << stack->count() << " symbols" << std::endl;
+    tokenize(file);
 }
