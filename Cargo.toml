@@ -1,0 +1,7 @@
+[package]
+name = "VL"
+version = "0.1.0"
+authors = ["Vinicius Hiroshi Higa"]
+edition = "2021"
+
+[dependencies]
