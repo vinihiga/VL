@@ -2,9 +2,15 @@
 #define LINKEDLIST_H
 
 template <typename T>
-struct LinkedList {
+class LinkedList {
+private:
     T value;
     LinkedList<T>* next;
+public:
+    LinkedList(T newValue);
+    ~LinkedList();
+    T& operator[](int);
+    void append(T newValue);
 };
 
 #endif
