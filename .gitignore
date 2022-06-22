@@ -492,3 +492,4 @@ FodyWeavers.xsd
 src/*/*.dSYM
 src/*/*.o
 src/*.exe
+target/
