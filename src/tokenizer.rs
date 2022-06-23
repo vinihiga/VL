@@ -1,3 +1,5 @@
+use std::borrow::Borrow;
+
 pub fn tokenize(line_content: &str) {
     let mut tokens: Vec<String> = line_content.split(" ").map(|s| s.to_string()).collect();
     let operation_queue = ["*", "/", "+", "-"];
@@ -14,16 +16,7 @@ pub fn tokenize(line_content: &str) {
                 if index < tokens.len() && tokens[index] == operation {
                     println!("{}", tokens.join(" "));
 
-                    let new_token = join_variables(
-                        tokens[index - 1].clone(),
-                        tokens[index + 1].clone(),
-                        tokens[index].clone());
-
-                    tokens.remove(index - 1);
-                    tokens.remove(index - 1);
-                    tokens.remove(index - 1);
-
-                    tokens.insert(index - 1, new_token);
+                    rearrange_token(index, &mut tokens);
                 }
             }
         }
@@ -34,23 +27,16 @@ pub fn tokenize(line_content: &str) {
 
 fn join_variables(x1: String, x2: String, operator: String) -> String {
     let mut result: String = "\0".to_string();
+    let value1 = x1.parse::<i32>().unwrap();
+    let value2 = x2.parse::<i32>().unwrap();
 
     if operator == "+" {
-        let value1 = x1.parse::<i32>().unwrap();
-        let value2 = x2.parse::<i32>().unwrap();
         result = (value1 + value2).to_string();
     } else if operator == "-" {
-        let value1 = x1.parse::<i32>().unwrap();
-        let value2 = x2.parse::<i32>().unwrap();
         result = (value1 - value2).to_string();
     } else if operator == "*" {
-        let value1 = x1.parse::<i32>().unwrap();
-        let value2 = x2.parse::<i32>().unwrap();
         result = (value1 * value2).to_string();
     } else if operator == "/" {
-        let value1 = x1.parse::<i32>().unwrap();
-        let value2 = x2.parse::<i32>().unwrap();
-
         if value2 == 0 {
             panic!("Division by zero!");
         }
@@ -61,6 +47,15 @@ fn join_variables(x1: String, x2: String, operator: String) -> String {
     return result;
 }
 
-fn rearrange_token(new_token: &String, operator_index: usize, tokens_list: &Vec<String>) {
-    
+fn rearrange_token(operator_index: usize, tokens: &mut Vec<String>) {
+    let new_token = join_variables(
+        tokens[operator_index - 1].clone(),
+        tokens[operator_index + 1].clone(),
+        tokens[operator_index].clone());
+
+    tokens.remove(operator_index - 1);
+    tokens.remove(operator_index - 1);
+    tokens.remove(operator_index - 1);
+
+    tokens.insert(operator_index - 1, new_token);
 }
