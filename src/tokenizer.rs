@@ -2,34 +2,34 @@ pub fn tokenize(line_content: &str) {
     let mut tokens: Vec<String> = line_content.split(" ").map(|s| s.to_string()).collect();
     let operation_queue = ["*", "/", "+", "-"];
 
+    // Iterating for each operator. We follow the Mathmatics priority rule.
     for operation in operation_queue {
-        if tokens.len() >= 3 && tokens[1] == operation {
-            while tokens.len() >= 3 {
-                let new_token = join_variables(
-                    tokens[0].clone(),
-                    tokens[2].clone(),
-                    tokens[1].clone());
+        println!("time: {}", operation.to_string());
 
-                tokens.remove(0);
-                tokens.remove(0);
-                tokens.remove(0);
+        // Verifying and solving each sentence.
+        while tokens.contains(&operation.to_string()) {
 
-                if tokens.len() > 0 {
-                    tokens.remove(0);
+            // Iterating for token to find the matching operator time.
+            for index in 0 .. tokens.len() {
+                if index < tokens.len() && tokens[index] == operation {
+                    println!("{}", tokens.join(" "));
 
-                    if new_token.parse::<i32>().unwrap() >= 0 {
-                        tokens.push("+".to_string());
-                    } else {
-                        tokens.push("-".to_string());
-                    }
+                    let new_token = join_variables(
+                        tokens[index - 1].clone(),
+                        tokens[index + 1].clone(),
+                        tokens[index].clone());
+
+                    tokens.remove(index - 1);
+                    tokens.remove(index - 1);
+                    tokens.remove(index - 1);
+
+                    tokens.insert(index - 1, new_token);
                 }
-
-                tokens.push(new_token);
-
-                println!("{}", tokens.join(" "));
             }
         }
     }
+
+    println!("The result is {}", tokens.join(" "));
 }
 
 fn join_variables(x1: String, x2: String, operator: String) -> String {
@@ -59,4 +59,8 @@ fn join_variables(x1: String, x2: String, operator: String) -> String {
     }
 
     return result;
+}
+
+fn rearrange_token(new_token: &String, operator_index: usize, tokens_list: &Vec<String>) {
+    
 }
