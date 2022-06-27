@@ -2,7 +2,7 @@ use std::fs;
 mod tokenizer;
 
 fn main() {
-    read_file("./samples/addition.vl")
+    read_file("./samples/test.vl")
 }
 
 fn read_file(path: &str) {
